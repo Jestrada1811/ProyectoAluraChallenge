@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Encriptador-Alura</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300&display=swap" rel="stylesheet">
+    
+</head>
+
+<body>
+    <header>
+        <img class="logo" src="C:\Users\jestr\Documents\Encriptador\imagenes\Vector.png" alt="logo de Alura" >
+    </header>
+    <main>
+        <section>
+            <textarea class="text-area" cols="30" rows="10" placeholder="Ingrese el texto en esta área"></textarea>
+
+            <div>
+                <h6 class="informacion">Sólo letras minúsculas y sin acento</h6>
+            </div>
+            <div class="botones">
+                <button class="btn-encriptar" onclick="btnEncriptar()">Encriptar</button>
+                <button class="btn-desencriptar" onclick="btnDesencriptar()">Desencriptar</button>
+            </div>
+        </section>
+        <section>
+            <textarea class= "mensajebase" cols="20" rows="10"></textarea>
+            
+            <div>
+                <button class="btn-copiar" onclick="btnCopiar()">Copiar</button>
+            </div>
+        </section>
+
+    </main>
+<script> 
+const textarea = document.querySelector(".text-area");
+const mensajebase = document.querySelector(".mensajebase");
+
+
+
+//La letra "e" es convertida para "enter"
+//La letra "i" es convertida para "imes"
+//La letra "a" es convertida para "ai"
+//La letra "o" es convertida para "ober"
+//La letra "u" es convertida para "ufat"
+
+function btnEncriptar(){
+    const textoEncriptado = Encriptar(textarea.value)
+    mensajebase.value = textoEncriptado
+    textarea.value = "";
+    mensajebase.style.backgroundImage = none
+}
+
+
+function Encriptar(stringEncriptada){
+    let matrizCodigo = [["e","enter"], ["i","imes"], ["a", "ai"], ["o", "ober"], ["u","ufat"]];
+    stringEncriptada = stringEncriptada.toLowerCase()
+
+    for(let i = 0; i < matrizCodigo.length; i++){
+        if(stringEncriptada.includes(matrizCodigo[i][0])){
+            stringEncriptada =stringEncriptada.replaceAll(matrizCodigo[i][0], matrizCodigo[i][1])
+
+        }
+
+    }
+    return stringEncriptada
+    
+
+}
+
+
+
+function btnDesencriptar(){
+    const textoEncriptado = Desencriptar(textarea.value)
+    mensajebase.value = textoEncriptado
+    textarea.value = "";
+}
+
+function Desencriptar(stringDesencriptada){
+    let matrizCodigo = [["e","enter"], ["i","imes"], ["a", "ai"], ["o", "ober"], ["u","ufat"]];
+    stringDesencriptada = stringDesencriptada.toLowerCase()
+
+    for(let i = 0; i < matrizCodigo.length; i++){
+        if(stringDesencriptada.includes(matrizCodigo[i][1])){
+            stringDesencriptada =stringDesencriptada.replaceAll(matrizCodigo[i][1], matrizCodigo[i][0])
+
+        }
+
+    }
+    return stringDesencriptada
+
+}
+
+
+
+function btnCopiar(){
+    const textocopiado = mensajebase.value;
+    navigator.clipboard.writeText(textocopiado);
+    alert = "Texto copiado al portapapeles";
+}
+
+
+
+</script>
+
+
+</body>
+
+<footer>
+    <p class="referencia">Proyecto realizado por Johnny Estrada-2022. Proyecto Challenge Encriptador Alura
+        <a  class="link1" href="https://github.com/Jestrada1811/AluraGit">Git-Github del proyecto</a>
+    </p>
+</footer>
+</html>
